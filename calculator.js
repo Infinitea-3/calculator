@@ -7,15 +7,26 @@ let divideNumbers = (a,b) => a / b;
 //Actual Calculation Step
 let operate = function(a,b,operator){
     if(operator === "+"){
-        addNumbers(a,b);
+        return addNumbers(a,b);
     }
-    else if (operator === "-"){
-        subtractNumbers(a,b);
+    else if (operator == "-"){
+        return subtractNumbers(a,b);
     }
     else if (operator === "*"){
-        multiplyNumbers(a,b);
+        return multiplyNumbers(a,b);
     }
     else if (operator === "/"){
-        divideNumbers(a,b);
+        return divideNumbers(a,b);
     }
-}
+};
+
+const display = document.querySelector('.display');
+let displayValue = 0
+const numbers = document.querySelectorAll('.number');
+
+numbers.forEach(button=>{
+    button.addEventListener('click', function(){
+        display.textContent = button.textContent;
+        displayValue = button.textContent;
+    });
+});
