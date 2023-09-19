@@ -1,5 +1,5 @@
 *{
-    font-size: 20px;
+    font-size: 24px;
 }
 
 
@@ -9,14 +9,18 @@ body{
 }
 
 .container{
-    max-width: 300px;
+    max-width: 500px;
     background-color: black;
+    border-radius: 5px;
+    border-color: black;
+    border: solid;
 }
 
 .display{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
+    margin: 10px;
     color: white;
 }
 
@@ -27,9 +31,9 @@ body{
 button{
     display: flex;
     justify-content: center;
-    flex-grow: 1;
     margin: 1px;
     border: none;
+    min-width: 60px;
 }
 
 .equalSign{
@@ -38,7 +42,7 @@ button{
     background-color: pink;
 }
 
-.reset, .delete, .plusMinus{
+.decimalPoint, .reset, .delete, .plusMinus{
     background-color: rgb(173, 173, 255);
 }
 
@@ -47,6 +51,6 @@ button{
 
 }
 
-.decimalPoint, .operator{
+.operator{
     background-color: rgb(255, 255, 168);
 }
