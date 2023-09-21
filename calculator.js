@@ -63,7 +63,7 @@ operators.forEach(button=>{
             displayValue.push(operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2)));
         }
         //Override First Operator With Second (If Two Are Pressed Sequentially)
-        if(displayValue.at(-2)=="+" || displayValue.at(-2)=="-" || displayValue.at(-2)=="*" || displayValue.at(-2)=="/"){
+        if(displayValue.at(-2) == "+" || displayValue.at(-2) == "-" || displayValue.at(-2) == "*" || displayValue.at(-2) == "/"){
             displayValue = displayValue.slice(0,-2);
         }
         displayValue.push((button.textContent));
@@ -76,7 +76,7 @@ operators.forEach(button=>{
 //Run 'Operate' When Equal Sign Is Pressed
 const equalSign = document.querySelector('.equalSign');
 equalSign.addEventListener('click',function(){
-    
+    //Handle Overflow (If Any)
     if((operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2))).length > 19){
         answer = operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2));
         shortAnswer = ans.slice(0,19);
@@ -86,6 +86,7 @@ equalSign.addEventListener('click',function(){
     displayValue.push(operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2)));
     }
     display.textContent = displayValue.at(-1);
+    
     //Check That No Decimals Are Added To Answers
     checkDecimalString = String(displayValue.at(-1));
     if(checkDecimalString.includes(".")==true){
@@ -94,6 +95,7 @@ equalSign.addEventListener('click',function(){
     else{
         hasDecimalPoint = false;
     }
+    console.log(displayValue);
 });
 
 //Flip Sign When +/- Button Pressed
@@ -132,14 +134,22 @@ const deleteButton = document.querySelector('.delete');
     deleteButton.addEventListener('click',function(){
         if(typeof Number(displayValue.at(-1)) == "number" && displayValue.at(-1)!=""){
             string = displayValue.at(-1);
-            newString = string.substring(0,string.length-1);
+            string = string.substring(0,string.length-1);
             displayValue = displayValue.slice(0,-1);
-            displayValue.push(newString);
+            
+            displayValue.push(string);
             if(displayValue.at(-1) == "" || displayValue.at(-1) == "-"){
                 displayValue = displayValue.slice(0,-1)
                 displayValue.push("0");
             }
-            display.textContent = displayValue.at(-1);
+            //Get Through Overflow (If Any)
+            if(displayValue.at(-1).length>19){
+                display.textContent = displayValue.at(-1).substring(0,19);
+            }
+            else{
+                display.textContent = displayValue.at(-1);
+            }
+            
         }
     });
 
@@ -149,5 +159,3 @@ resetButton.addEventListener('click',function(){
     displayValue = [""];
     display.textContent = 0
 });
-
-//Way to Handle Overflow
