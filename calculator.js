@@ -35,14 +35,20 @@ numbers.forEach(button=>{
     button.addEventListener('click', function(){
         if(displayValue.length == 0){
             number = button.textContent;
-            displayValue.push(number);
         }
         else{
-        number = displayValue.at(-1) + button.textContent;
-        displayValue = displayValue.slice(0,-1);
-        displayValue.push(number);
+            number = displayValue.at(-1) + button.textContent;
+            displayValue = displayValue.slice(0,-1);
         }
-        display.textContent = displayValue.at(-1);
+        displayValue.push(number);
+        
+        //Handle Overflow (But Don't Display It)
+        if(displayValue.at(-1).length>19){
+            display.textContent = displayValue.at(-1).slice(0,19);
+        }
+        else{
+            display.textContent = displayValue.at(-1);
+        }
     });
 });
 
@@ -70,9 +76,15 @@ operators.forEach(button=>{
 //Run 'Operate' When Equal Sign Is Pressed
 const equalSign = document.querySelector('.equalSign');
 equalSign.addEventListener('click',function(){
-    console.log(displayValue);
+    
+    if((operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2))).length > 19){
+        answer = operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2));
+        shortAnswer = ans.slice(0,19);
+        displayValue.push(shortAnswer);
+    }
+    else{
     displayValue.push(operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2)));
-    //displayValue.push("");
+    }
     display.textContent = displayValue.at(-1);
     //Check That No Decimals Are Added To Answers
     checkDecimalString = String(displayValue.at(-1));
