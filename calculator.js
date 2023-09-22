@@ -33,13 +33,17 @@ let displayValue = [""];
 
 numbers.forEach(button=>{
     button.addEventListener('click', function(){
-        if(displayValue.length == 0){
-            number = button.textContent;
+        last = displayValue.at(-1);
+        console.log(last);
+        
+        //Don't Override Old Numbers
+        if(Number.isInteger(last)==true){
+            displayValue.push("");
         }
-        else{
-            number = displayValue.at(-1) + button.textContent;
-            displayValue = displayValue.slice(0,-1);
-        }
+
+        //Concat Onto Existing Number
+        number = displayValue.at(-1) + button.textContent;
+        displayValue = displayValue.slice(0,-1);
         displayValue.push(number);
         
         //Handle Overflow (But Don't Display It)
