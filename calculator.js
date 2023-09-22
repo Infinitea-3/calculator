@@ -61,13 +61,13 @@ operators.forEach(button=>{
         //Solve Equation Before Continuing Onwards (If Previous Equation Exists)
         if(displayValue.at(-2) == "+" || displayValue.at(-2) == "-" || displayValue.at(-2) == "*" || displayValue.at(-2) == "/"){
             displayValue.push(operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2)));
+            display.textContent = displayValue.at(-1);
         }
         //Override First Operator With Second (If Two Are Pressed Sequentially)
         if(displayValue.at(-2) == "+" || displayValue.at(-2) == "-" || displayValue.at(-2) == "*" || displayValue.at(-2) == "/"){
             displayValue = displayValue.slice(0,-2);
         }
         displayValue.push((button.textContent));
-        display.textContent = displayValue.at(-1);
         displayValue.push("");
         hasDecimalPoint = false;
     });
@@ -133,7 +133,7 @@ decimalPoint.addEventListener('click',function(){
 const deleteButton = document.querySelector('.delete');
     deleteButton.addEventListener('click',function(){
         if(typeof Number(displayValue.at(-1)) == "number" && displayValue.at(-1)!=""){
-            string = displayValue.at(-1);
+            string = String(displayValue.at(-1));
             string = string.substring(0,string.length-1);
             displayValue = displayValue.slice(0,-1);
             
