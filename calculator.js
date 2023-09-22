@@ -61,7 +61,7 @@ const operators = document.querySelectorAll('.operator');
 let operatorValue = [];
 
 operators.forEach(button=>{
-    button.addEventListener('click', function(){
+    button.addEventListener('click', function(){       
         //Solve Equation Before Continuing Onwards (If Previous Equation Exists)
         if(displayValue.at(-2) == "+" || displayValue.at(-2) == "-" || displayValue.at(-2) == "*" || displayValue.at(-2) == "/"){
             displayValue.push(operate(Number(displayValue.at(-3)), Number(displayValue.at(-1)), displayValue.at(-2)));
